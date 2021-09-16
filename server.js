@@ -31,7 +31,3 @@ function listening() {
     console.log('server running');
     console.log(`running on localhost: ${port}`);
 }
-
-// const dotenv = require('dotenv');
-// dotenv.config();
-// console.log(process.env.FOO);
