@@ -58,6 +58,7 @@ function performAction() {
     });
 }
 
+// Post data that was retrieved from client side
 const postData = async(baseURL='', data) => {
     const response = await fetch(backendURL + baseURL, {
         method: 'POST',
