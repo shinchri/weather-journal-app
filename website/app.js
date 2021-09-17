@@ -17,10 +17,18 @@ function getUserResponse() {
 }
 
 // Update UI
-function updateUI ( date, temperature, content) {
-    document.getElementById('date').innerHTML = date;
-    document.getElementById('temp').innerHTML = temperature;
-    document.getElementById('content').innerHTML = content;
+const updateUI = async () => {
+    const response = await fetch('/retrieveData');
+    try {
+        const allData = await response.json();
+        document.getElementById('date').innerHTML = allData.date;
+        document.getElementById('temp').innerHTML = allData.temperature;
+        document.getElementById('content').innerHTML = allData.user_response;
+    }
+}
+
+( date, temperature, content) {
+    
 }
 
 // function to make GET request to OpenWeatherMap API
@@ -54,7 +62,7 @@ function performAction() {
         return data;
     })
     .then(function(data) {
-        updateUI(data.date, data.temperature, data.user_response);
+        updateUI();
     });
 }
 
