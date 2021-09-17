@@ -46,9 +46,6 @@ document.getElementById('generate').addEventListener('click', performAction);
 
 // Create Callback function 
 function performAction() {
-    const zip = document.getElementById('zip');
-    console.log(zip.validity.patternMismatch);
-    console.log((zip.value===''));
     if (zip.validity.patternMismatch || zip.value===''){
         alert('The zip code is incorrect for US.')
     }
