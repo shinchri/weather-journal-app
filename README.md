@@ -33,5 +33,4 @@ Need to install following:
 npm install express
 npm install cors
 npm install body-parser
-npm install axios
 ```

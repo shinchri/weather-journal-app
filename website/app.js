@@ -28,13 +28,11 @@ const updateUI = async () => {
         console.log("error", error);
     }
 };
-const axios = require('axios');
 
 // function to make GET request to OpenWeatherMap API
 const getWeather = async (baseURL = '', zipcode = '') => {
-    // const res = await fetch(baseURL + '&units=metric&zip=' + zipcode);
+    const res = await fetch(baseURL + '&units=metric&zip=' + zipcode);
     try {
-        const res = await axios.get(baseURL + '&units=metric&zip=' + zipcode);
         const data = await res.json();
         // console.log(data);
         return data;
@@ -48,22 +46,30 @@ document.getElementById('generate').addEventListener('click', performAction);
 
 // Create Callback function 
 function performAction() {
-    const zip = document.getElementById('zip').value;
+    const zip = document.getElementById('zip');
+    console.log(zip.validity.patternMismatch);
+    console.log(!(zip.value===''));
+    if( zip.validity.patternMismatch && !(zip.value === '')) {
+        getWeather(weatherURL, zip.value)
+        .then(function(weatherData) {
+            console.log(weatherData);
+            const data = {
+                'temperature': weatherData.main.temp,
+                'date': getRecentDate(),
+                'user_response': getUserResponse()
+            }
+            postData('/postData', data);
+            return data;
+        })
+        .then(function(data) {
+            updateUI();
+        });
+    }
+    else {
+        alert('The zip code is incorrect for US.')
+    }
 
-    getWeather(weatherURL, zip)
-    .then(function(weatherData) {
-        console.log(weatherData);
-        const data = {
-            'temperature': weatherData.main.temp,
-            'date': getRecentDate(),
-            'user_response': getUserResponse()
-        }
-        postData('/postData', data);
-        return data;
-    })
-    .then(function(data) {
-        updateUI();
-    });
+    
 }
 
 // Post data that was retrieved from client side
