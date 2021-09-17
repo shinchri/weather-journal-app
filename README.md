@@ -30,7 +30,8 @@ Need to download and install [node](https://nodejs.org/en/).
 Need to install following:
 
 ```bash
-npm express
-npm cors
-npm body-parser
+npm install express
+npm install cors
+npm install body-parser
+npm install axios
 ```

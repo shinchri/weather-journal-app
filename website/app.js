@@ -28,11 +28,13 @@ const updateUI = async () => {
         console.log("error", error);
     }
 };
+const axios = require('axios');
 
 // function to make GET request to OpenWeatherMap API
 const getWeather = async (baseURL = '', zipcode = '') => {
-    const res = await fetch(baseURL + '&units=metric&zip=' + zipcode);
+    // const res = await fetch(baseURL + '&units=metric&zip=' + zipcode);
     try {
+        const res = await axios.get(baseURL + '&units=metric&zip=' + zipcode);
         const data = await res.json();
         // console.log(data);
         return data;
