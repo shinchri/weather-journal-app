@@ -24,16 +24,14 @@ const updateUI = async () => {
         document.getElementById('date').innerHTML = allData.date;
         document.getElementById('temp').innerHTML = allData.temperature;
         document.getElementById('content').innerHTML = allData.user_response;
+    }catch(error) {
+        console.log("error", error);
     }
-}
-
-( date, temperature, content) {
-    
-}
+};
 
 // function to make GET request to OpenWeatherMap API
 const getWeather = async (baseURL = '', zipcode = '') => {
-    const res = await fetch(baseURL + '&zip=' + zipcode);
+    const res = await fetch(baseURL + '&units=metric&zip=' + zipcode);
     try {
         const data = await res.json();
         // console.log(data);
