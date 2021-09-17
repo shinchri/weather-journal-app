@@ -48,8 +48,11 @@ document.getElementById('generate').addEventListener('click', performAction);
 function performAction() {
     const zip = document.getElementById('zip');
     console.log(zip.validity.patternMismatch);
-    console.log(!(zip.value===''));
-    if( zip.validity.patternMismatch && !(zip.value === '')) {
+    console.log((zip.value===''));
+    if (zip.validity.patternMismatch || zip.value===''){
+        alert('The zip code is incorrect for US.')
+    }
+    else {
         getWeather(weatherURL, zip.value)
         .then(function(weatherData) {
             console.log(weatherData);
@@ -64,9 +67,6 @@ function performAction() {
         .then(function(data) {
             updateUI();
         });
-    }
-    else {
-        alert('The zip code is incorrect for US.')
     }
 
     
